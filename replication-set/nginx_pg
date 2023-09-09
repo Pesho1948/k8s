@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: 
+  name: nginx-pg
+spec:
+  template:
+    metadata:
+      name: pesho-pg
+      labels:
+        app: nginx-pg
+        type: db
+    spec:
+      containers:
+        - name: postgres
+          image: postgres
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "1234"
+        - name: nginx
+          image: nginx
+
+  replicas: 2
+  selector: 
+    matchLabels:
+      type: db

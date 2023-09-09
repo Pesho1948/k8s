@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: 
+  name: nginx-test
+  labels:
+    type: test
+spec:
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: nginx
+        type: test
+      name: nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+  replicas: 3
+  selector:
+    matchLabels:
+      type: test

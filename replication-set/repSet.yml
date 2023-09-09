@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: 
+  name: myapp-repset
+spec:
+  template:
+    metadata:
+      name: pesho-pg
+      labels:
+        app: postgres
+        tier: db
+    spec:
+      containers:
+        - name: postgres
+          image: postgres
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "1234"
+  replicas: 3
+  selector: 
+    matchLabels:
+      tier: db
